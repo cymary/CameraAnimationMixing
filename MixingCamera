@@ -1,0 +1,51 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0xbc632cff
+ label "blending between \n2 cameras"
+ note_font_size 42
+ selected true
+ xpos -480
+ ypos -144
+ bdwidth 378
+ bdheight 290
+}
+push $cut_paste_input
+Camera2 {
+ translate {1.684999943 0 0}
+ rotate {0 13 0}
+ name CameraB
+ selected true
+ xpos -284
+ ypos -13
+}
+Camera2 {
+ inputs 0
+ translate {-1.208439112 0 1.349363685}
+ rotate {0 15 0}
+ name CameraA
+ selected true
+ xpos -439
+ ypos 1
+}
+Camera2 {
+ inputs 0
+ translate {{lerp(CameraA.translate,CameraB.translate,slider)}
+{lerp(CameraA.translate,CameraB.translate,slider)}
+{lerp(CameraA.translate,CameraB.translate,slider)}}
+ rotate {{lerp(CameraA.rotate,CameraB.rotate,slider)}
+{lerp(CameraA.rotate,CameraB.rotate,slider)}
+{lerp(CameraA.rotate,CameraB.rotate,slider)}}
+ scaling {{lerp(CameraA.scaling,CameraB.scaling,slider)}
+{lerp(CameraA.scaling,CameraB.scaling,slider)}
+{lerp(CameraA.scaling,CameraB.scaling,slider)}}
+ name Camera_dissolved
+ selected true
+ xpos -360
+ ypos 76
+ addUserKnob {20 User}
+ addUserKnob {7 slider}
+ slider 0.515
+}
